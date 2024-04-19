@@ -14,7 +14,9 @@ for key in wordEndings:
 def parseSemantic(word):
     length = len(word) #O(1)
     endOfWord = ''
-    for i in range(maxLen): #O(n)
+    if length < maxLen:
+        return word
+    for i in range(maxLen): 
         endOfWord = word[length-i-1] + endOfWord
         # buscar en diccionario
         if endOfWord in wordEndings: #O(1)
@@ -27,5 +29,5 @@ def parseSemantic(word):
     return word
  
 
-print(parseSemantic('sanguchería'))
+print(parseSemantic('ds'))
 
