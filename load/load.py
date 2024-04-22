@@ -62,3 +62,4 @@ array = ['apple','app','ape','banana','bat','ball','cat','car','dog']
 insertMainTrie(t,array,1,'document1')
 
 printTrie(t.root,0)
+

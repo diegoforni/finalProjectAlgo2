@@ -29,5 +29,7 @@ def parseSemantic(word):
     return word
  
 
-print(parseSemantic('ds'))
+print(parseSemantic('fumador'))
+print(parseSemantic('fumadores'))
+print(parseSemantic('fumador'))
 

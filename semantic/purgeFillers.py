@@ -33,3 +33,4 @@ def cleanSimbols(word):
         word = word.replace(i,'')
     return word
             
+
