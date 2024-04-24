@@ -22,6 +22,33 @@ def printTrie(node, level):
 #t is the trie, word is the word to be inserted, and document_id is the document_id of the document containing the word
 #documentTitle is the title of the document containing the word
 
+
+def createPdfID(pdfNamesList):
+    pdfToID = {}
+    idToPdf = {}
+    i = 0
+    for pdfName in pdfNamesList:
+        pdfToID[i] = pdfName
+        idToPdf[pdfName] = i
+        i += 1
+    return pdfToID, idToPdf
+
+def getPdfFromID(id, idToPdf):
+    return idToPdf[id]
+
+
+def getIDFromPdf(pdf, pdfToID):
+
+    return pdfToID[pdf]
+
+pdfList = ['apple','app','ape','banana','bat','ball','cat','car','dog']
+
+idToPdf, pdfToID = createPdfID(pdfList)
+
+print(getPdfFromID(5,idToPdf))
+print(getIDFromPdf('banana',pdfToID))
+
+
 def insertTrieDict(t,word,document_id,documentTitle):
     if t.root is None:
         t.root = TrieNode()
