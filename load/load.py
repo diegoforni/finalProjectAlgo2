@@ -7,6 +7,7 @@ class TrieNode:
     key = None
     document_id = None
     isEndOfWord = False
+    appearances = 0 
 
 def printTrie(node, level):
     if node is None:
@@ -73,6 +74,12 @@ def insertTrieDict(t,word,document_id,documentTitle):
             current = newNode
             newNode.document_id = {document_id:documentTitle}
     current.isEndOfWord = True
+    
+    if current.isEndOfWord and found: 
+        current.appearances += 1 
+
+    if current.isEndOfWord and not found: 
+        current.appearances = 1 
 
 ##Inserting an array full of words into the main trie using insertTrieDict
 #O(n) where n is the number of words in the array, and O(n*m) if we also consider the insertTrieDict
@@ -84,9 +91,11 @@ def insertMainTrie(t,array,document_id,documentTitle):
 
 
 ##Testing the insert functions
-t = Trie()
-array = ['apple','app','ape','banana','bat','ball','cat','car','dog']
-insertMainTrie(t,array,1,'document1')
+T = Trie()
+array = ['apple','apple','ape','banana','bat','ball','cat','car','dog']
+insertMainTrie(T,array,1,'document1')
+printTrie(T.root,0)
 
-printTrie(t.root,0)
+print(T.root.children["a"].children["p"].children["p"].children["l"].children["e"].appearances)
+#It will print 2 for the last char of "apple" ("e") as the word appears two times
 
