@@ -7,7 +7,7 @@ class TrieNode:
     key = None
     document_id = None
     isEndOfWord = False
-    appearances = 0 
+    appearances = {} 
 
 def printTrie(node, level):
     if node is None:
@@ -50,7 +50,7 @@ print(getPdfFromID(5,idToPdf))
 print(getIDFromPdf('banana',pdfToID))
 
 
-def insertTrieDict(t,word,document_id,documentTitle):
+def insertTrieDict(t,word,document_id):
     if t.root is None:
         t.root = TrieNode()
         t.root.children = {}
@@ -61,8 +61,8 @@ def insertTrieDict(t,word,document_id,documentTitle):
         
         if char in current.children:
             found = True
-            if not(document_id in current.children[char].document_id):
-                current.children[char].document_id[document_id] = documentTitle
+            
+            current.children[char].document_id = document_id
             current = current.children[char]
         
         if found is False:
@@ -72,28 +72,36 @@ def insertTrieDict(t,word,document_id,documentTitle):
             newNode.parent = current
             current.children[char] = newNode
             current = newNode
-            newNode.document_id = {document_id:documentTitle}
+            newNode.document_id = document_id
     current.isEndOfWord = True
     
-    if current.isEndOfWord and found: 
-        current.appearances += 1 
+    if current.isEndOfWord and found:
+        if current.document_id in current.appearances:
+            current.appearances[current.document_id] += 1
+        else:
+            current.appearances[current.document_id] = 1
 
-    if current.isEndOfWord and not found: 
-        current.appearances = 1 
+    if current.isEndOfWord and not found:
+        current.appearances = {current.document_id: 1}
+
 
 ##Inserting an array full of words into the main trie using insertTrieDict
 #O(n) where n is the number of words in the array, and O(n*m) if we also consider the insertTrieDict
 #function, where m is the length of longest word and n is the number of words in the array
 
-def insertMainTrie(t,array,document_id,documentTitle):
+def insertMainTrie(t,array,document_id):
     for word in array:
-        insertTrieDict(t,word,document_id,documentTitle)
+        insertTrieDict(t,word,document_id)
 
 
 ##Testing the insert functions
 T = Trie()
 array = ['apple','apple','ape','banana','bat','ball','cat','car','dog']
-insertMainTrie(T,array,1,'document1')
+insertMainTrie(T,array,1,)
+array = ['apple','ape','banana','bat','ball','cat','car','dog']
+
+insertMainTrie(T,array,6,)
+
 printTrie(T.root,0)
 
 print(T.root.children["a"].children["p"].children["p"].children["l"].children["e"].appearances)
