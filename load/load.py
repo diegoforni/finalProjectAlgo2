@@ -97,10 +97,10 @@ def insertMainTrie(t,array,document_id):
 ##Testing the insert functions
 T = Trie()
 array = ['apple','apple','ape','banana','bat','ball','cat','car','dog']
-insertMainTrie(T,array,1,)
+insertMainTrie(T,array,1)
 array = ['apple','ape','banana','bat','ball','cat','car','dog']
 
-insertMainTrie(T,array,6,)
+insertMainTrie(T,array,6)
 
 printTrie(T.root,0)
 
