@@ -1,5 +1,3 @@
-
-
 class Trie:
     root = None
 
@@ -71,11 +69,11 @@ def insertMainTrie(t,array,document_id):
 '''
 ##Testing the insert functions
 T = Trie()
-array = ['apple','apple','ape','banana','bat','ball','cat','car','dog']
-insertMainTrie(T,array,1)
-array = ['apple','ape','banana','bat','ball','cat','car','dog']
+array1 = ['apple','apple','ape','banana','bat','ball','cat','car','dog']
+insertMainTrie(T,array1,1)
+array6 = ['apple','ape','banana','bat','ball','cat','car','dog']
 
-insertMainTrie(T,array,6)
+insertMainTrie(T,array6,6)
 
 printTrie(T.root,0)
 
@@ -84,15 +82,12 @@ print(T.root.children["a"].children["p"].children["p"].children["l"].children["e
 
 '''
 
-
-
-
 #searches words from the array the TrieDict structure 
 def searchTrieDict(T,array): 
-    wordsInTrie = {} #store a key-value pair to keep track of the words that are or not in the trie. For example: {apple: False, app: True}
+    wordsInTrie = {} #store a key-value pair to keep track of the words that are in the Trie 
     for word in array: 
-        wasFound = searchTrieDictRecursive(T.root,word,word,foundChars ="")
-        wordsInTrie[word] = wasFound 
+        wordData = searchTrieDictRecursive(T.root,word,word,foundChars="") #returns a new dict with the word data (appearences on each document)
+        wordsInTrie[word] = wordData #add the wordData dict to the wordsInTrie dict
     return wordsInTrie
 
 
@@ -100,12 +95,12 @@ def searchTrieDict(T,array):
 def searchTrieDictRecursive(current,word,copyWord,foundChars): 
     
     if current is None: 
-        return False 
+        return 
    
     if len(word) < 1: 
         if copyWord != foundChars: 
-            return False 
-        return current.isEndOfWord 
+            return 
+        return current.appearances #Return the dict containing the data of the word 
     
 
     if current.children is not None: 
@@ -113,17 +108,18 @@ def searchTrieDictRecursive(current,word,copyWord,foundChars):
             if child == word[0]: 
                 foundChars += child 
                 return searchTrieDictRecursive(current.children[child],word[1:],copyWord,foundChars)
-        return False 
+        return
     
 '''
 T = Trie()
-array = ['apple','app','ape','banana','bat','ball','cat','car','dog']
+array = ['apple','apple','ape','banana','bat','ball','cat','car','dog']
 insertMainTrie(T,array,1)
 
 array2 = ['apple','app','horse','keyboard','bat','ball','lion','car','truck']
+insertMainTrie(T,array2,2)
 
-wordsInTrie = searchTrieDict(T,array2)
+wordsInTrie = searchTrieDict(T,array) #Use the searchDict function to search for an array of words 
 print(wordsInTrie) 
+print("----------") 
+print(searchTrieDictRecursive(T.root,"apple","apple","")) #Use the recursive function to look for individual words
 '''
-
-
