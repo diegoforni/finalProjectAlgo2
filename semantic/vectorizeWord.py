@@ -22,16 +22,21 @@ def calculateFrequency(word1, word2, wordsText):
     return count
 
 def vectorizeWord(word,matrix):
+    importantWords = {}
     word = cleanText.parseSemantic(word)
     word = cleanText.purgeFillers(word)
     vector = []
     for key in matrix[word]:
         vector.append(matrix[word][key])
         if matrix[word][key] > 1:
-            print(key)
+            importantWords[key] = matrix[word][key]
+    
+    #Ordenamos las palabras por importancia
+    sortedImportantWords = sorted(importantWords.items(), key=lambda x: x[1], reverse=True)
+
     if vector == []:
         return [1] * len(matrix)
-    return vector
+    return vector, sortedImportantWords
 
 ##Necesitamos un texto lo suficientemente bueno, que hable de muchos temas para poder abordar casi todos los temas de los que se nos hable, es lo que el 
 ##Jorch nos dijo que seria nuestra bag of words, que se usa para vectorizar las palabras y posteriormente compararlas
@@ -44,7 +49,9 @@ text = 'La Inteligencia Artificial (IA) ha emergido como una fuerza poderosa que
 #wordsText = cleanText.cleanText(text)
 
 matrix = createMatrix(text)
-#print(matrix)
-#print(len(text.split()))
-print(vectorizeWord('ia',matrix))
+
+vector, importantWords  = vectorizeWord('ia',matrix)
+
+#print(vector)
+print(importantWords)
 
