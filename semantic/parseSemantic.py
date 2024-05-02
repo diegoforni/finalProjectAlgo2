@@ -27,9 +27,3 @@ def parseSemantic(word):
                 word = word[:newLength-1] + '@'
             return word
     return word
-
-print(parseSemantic('adoras'))
-print(parseSemantic('fumador'))
-print(parseSemantic('fumaría'))
-print(parseSemantic('fumar'))
-
