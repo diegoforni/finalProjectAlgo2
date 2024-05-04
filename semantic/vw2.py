@@ -6219,34 +6219,12 @@ sport participants. Research Quarterly for Exercise and Sport, 69, 47-57."""
 texts = [text1, text2, text3, text4, text5, text6, text7, text8, text9, text10]
 
 cantidadDePalabras = 0
-cantidadParrafos = 0
-paragraphs = []
-
 for text in texts:
-    # Split text into paragraphs
-    text_paragraphs = text.split("\n\n")  
-    
-    # Extend the list of paragraphs
-    paragraphs.extend(text_paragraphs)
-    
-    # Count paragraphs
-    cantidadParrafos += len(text_paragraphs)
-    
-    # Loop through each paragraph
-    for paragraph in text_paragraphs:
-        # Split paragraph into words
-        words = paragraph.split()
-        
-        # Count words
-        cantidadDePalabras += len(words)
-
-# Assign the list of paragraphs to 'texts'
-texts = paragraphs
-
+    text = text.split()
+    cantidadDePalabras += len(text)
 print("Cantidad de palabras en el texto:")
 print(cantidadDePalabras)
-print("Cantidad de parrafos en el texto:")
-print(cantidadParrafos)
+
 
 
 for text in range(len(texts)):
@@ -6257,8 +6235,6 @@ def calculate_tf(text, query):
     words = ' '.join(text).lower()
     word_count = len(words.split())
     query_count = words.count(query.lower())
-    if word_count == 0:
-        return 0
     tf = query_count / word_count
     return tf
 
@@ -6299,9 +6275,7 @@ print("Time to execute fillMatrix: ", execution_time, " seconds")
 varToCall = cleanText.cleanText("comida")[0]
 if varToCall in matrix:
     v1 = matrix[varToCall]
-else:
-    print("Word not found in matrix")
-    exit()
+
 
 
 def calculateDistance(v1, v2):
