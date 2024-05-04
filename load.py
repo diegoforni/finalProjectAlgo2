@@ -1,23 +1,19 @@
-from trie import * 
-from pdfFunctions import *
+import trie
+import pdfFunctions
 import pickle
 import os    
+import cleanText
 
-from cleanText import cleanText
-
-#Acá va la función que recibe una lista de pdf para insertar en el Trie 
-
-#recibo una lista de pdfs y los inserto en el trie
+#crea una lista con los nombres de los pdfs, cada uno le va a tener que cambiar el path
 def namesPDFs():
     listNamesPDFs = []
     listNamesPDFs = os.listdir("C:\\Users\\Facultad Juli\\Documents\\GitHub\\finalProjectAlgo2\\pdfs")
     return listNamesPDFs
 
-#"C:\\Users\\Facultad Juli\\Documents\\GitHub\\finalProjectAlgo2\\pdfs\\" + listPDFs[0]
+#"aca va el path de cada uno en su compu" + listPDFs[0]
 def convertPDFs(listPDFs):
     listTexts = []
     for i in range(len(listPDFs)):
-        print("aca entra")
         text = ''
         with open("C:\\Users\\Facultad Juli\\Documents\\GitHub\\finalProjectAlgo2\\pdfs\\" + listPDFs[i], 'rb') as file:
             # Lee el contenido del archivo PDF como una cadena binaria
@@ -35,27 +31,37 @@ def convertPDFs(listPDFs):
         listTexts.append(text)
     return listTexts
 
-def loadInTrie():
+def loadInTrie(): #esta es la funcion que hay que llamar para cargar los archivos al trie
     
     listPDFs = namesPDFs()  #lista de nombres de los pdfs
     listTexts = convertPDFs(listPDFs) #lista de textos de los pdfs como strings
     #limpio todos los textos
     for i in range(len(listPDFs)):
-        listTexts[i] = cleanText(listTexts[i])
-    #return listTexts 
+        listTexts[i] = cleanText.cleanText(listTexts[i])
+
     #creo una lista con los IDs de los pdfs
-    idToPdf, pdfToID = createPdfID(listPDFs)
+    idToPdf, pdfToID = pdfFunctions.createPdfID(listPDFs)
     ids = []
     for i in range(len(listPDFs)):
-        ids.append(getIDFromPdf(listPDFs[i],pdfToID))
+        ids.append(pdfFunctions.getIDFromPdf(listPDFs[i],pdfToID))
         
     #inserto en el trie
-    trie = Trie()
-    for i in range(len(listTexts)): 
-        insertMainTrie(trie,listTexts[i],ids[i])
-    
+    t = trie.Trie()
+    for i in range(len(listTexts)):    
+        trie.insertTrieDict(t,listTexts[i],ids[i])
     return trie
-         
-print(loadInTrie()[0])
-#loadInTrie()
-#print(T.root.children[0].children[0].children[0].children[0].children[0].appearances)
+
+def saveTrie(trie): #esta funcion guarda el trie en un archivo
+    with open("trieDocument", "wb") as f:
+        pickle.dump(trie, f)
+        
+def loadTrie(): #esta funcion carga el trie desde un archivo
+    with open("trieDocument", "rb") as f:
+        trie = pickle.load(f)
+    return trie   
+      
+# T = Trie()
+T = loadInTrie()
+
+saveTrie(T)
+#printTrie(loadInTrie().root,1)
