@@ -48,8 +48,8 @@ def loadInTrie(): #esta es la funcion que hay que llamar para cargar los archivo
     #inserto en el trie
     t = trie.Trie()
     for i in range(len(listTexts)):    
-        trie.insertTrieDict(t,listTexts[i],ids[i])
-    return trie
+        trie.insertMainTrie(t,listTexts[i],ids[i])
+    return t
 
 def saveTrie(trie): #esta funcion guarda el trie en un archivo
     with open("trieDocument", "wb") as f:
@@ -61,7 +61,7 @@ def loadTrie(): #esta funcion carga el trie desde un archivo
     return trie   
       
 # T = Trie()
-T = loadInTrie()
+#T = loadInTrie()
 
-saveTrie(T)
-#printTrie(loadInTrie().root,1)
+#saveTrie(T)
+trie.printTrie(loadInTrie().root,1)
