@@ -1,4 +1,6 @@
 import cleanText 
+import time
+import time
 text1   = """ En 1889, un entusiasta visitante italiano de Santiago del Estero celebraba el alcance y la velocidad del "progreso" liberal en esta capital provincial. Elogiaba el nuevo mercado, el animado centro comercial y los hogares colmados de productos importados de Europa y Buenos Aires. Hacía especial hincapié en su apreciación por las cocinas renovadas que, a su juicio, "revela[ba]n un adelanto también en la manera de comer". Citando al famoso aforismo de Brillat Savarin "dime cómo comes y te diré quién eres", sostenía que esta nueva manera de cocinar y comer representaba "un verdadero progreso" (Fazio 1889; Tasso 1984: 6). Aunque no especificaba qué comían las elites a las que se refería, probablemente fuera comida francesa o al menos platos criollos disimulados con nombres franceses y servidos en elegantes mesas.
 
 La pregunta sobre quiénes eran los argentinos y qué y cómo debían comer recibió considerable atención a finales del siglo XIX y durante el siglo XX. Cerca del cambio de siglo, las elites argentinas (al igual que sus contrapartes en México y Brasil), abrazaron públicamente los platos franceses a fin de consolidar su respetabilidad y carácter civilizado. Al mismo tiempo, estas elites disfrutaban todos los días de especialidades con ingredientes y técnicas locales, incluyendo locros, empanadas y asados. A medida que vastos contingentes de inmigrantes -la mayoría provenientes de Italia y España- adoptaron a la Argentina como lugar de destino a fines de siglo, también ellos dejarían una huella importante en las costumbres culinarias locales. Como me explicó un anciano de ascendencia italiana que entrevisté en Buenos Aires en el año 23, "aquí la mayor influencia es española e italiana. La mayor influencia es esa. Después hay evidentemente otras influencias" (Livio y Emilia S).
@@ -6246,8 +6248,6 @@ def fillMatrix(texts):
     allWords = list(set(allWords))
 
 
-
-
     for word in allWords:
         if word not in matrix:
             matrix[word] = []
@@ -6260,18 +6260,46 @@ def printMatrix(matrix):
     for word, tf_scores in matrix.items():
         print(word, tf_scores)
 
+
+
         
+start_time = time.time()
 matrix = fillMatrix(texts)
+end_time = time.time()
+
+execution_time = end_time - start_time
+print("Time to execute fillMatrix: ", execution_time, " seconds")
 
 
-varToCall = cleanText.cleanText("harina")[0]
-if matrix.get(varToCall) != None:
-    print(matrix[varToCall])     
-else:
-    print("La palabra no se encuentra en el texto")
 
-varToCall = cleanText.cleanText("comida")[0]
-if matrix.get(varToCall) != None:
-    print(matrix[varToCall])    
-else:
-    print("La palabra no se encuentra en el texto")
+varToCall = cleanText.cleanText("array")[0]
+if varToCall in matrix:
+    v1 = matrix[varToCall]
+
+
+
+def calculateDistance(v1, v2):
+    distance = 0
+    for i in range(len(v1)):
+        distance += (v1[i] - v2[i])**2
+    return distance**0.5
+
+
+
+def getClosestWords(matrix, v1):
+    closestWords = [100, ""]
+    for key, value in matrix.items():
+        vector = matrix[key]
+        distance = calculateDistance(v1, vector)
+        if distance < closestWords[0] and distance != 0:
+            closestWords = [distance, key]
+    return closestWords
+
+start_time = time.time()
+closest = getClosestWords(matrix, v1)
+print("Closest word to is:", closest[1])
+print(matrix[closest[1]])
+print(v1)
+end_time = time.time()
+execution_time = end_time - start_time
+print("Time to execute getClosestWords: ", execution_time, " seconds")
