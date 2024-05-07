@@ -7,7 +7,7 @@ import cleanText
 #crea una lista con los nombres de los pdfs, cada uno le va a tener que cambiar el path
 def namesPDFs():
     listNamesPDFs = []
-    listNamesPDFs = os.listdir("C:\\Users\\Facultad Juli\\Documents\\GitHub\\finalProjectAlgo2\\pdfs")
+    listNamesPDFs = os.listdir("C:\\Users\\pc\\Documents\\GitHub\\ProjectFinalAlgo2\\pdfs")
     return listNamesPDFs
 
 #"aca va el path de cada uno en su compu" + listPDFs[0]
@@ -15,7 +15,7 @@ def convertPDFs(listPDFs):
     listTexts = []
     for i in range(len(listPDFs)):
         text = ''
-        with open("C:\\Users\\Facultad Juli\\Documents\\GitHub\\finalProjectAlgo2\\pdfs\\" + listPDFs[i], 'rb') as file:
+        with open("C:\\Users\\pc\\Documents\\GitHub\\ProjectFinalAlgo2\\pdfs\\" + listPDFs[i], 'rb') as file:
             # Lee el contenido del archivo PDF como una cadena binaria
             pdf_content = file.read()
             try:

@@ -65,8 +65,7 @@ wordEndings = {
 
 def parseSemantic(word):
     length = len(word) #O(1)
-    if word[length-1] == 's':
-        return parseSemantic(word[:length-1])
+
     endOfWord = ''
     for i in range(len(word)):
         endOfWord = word[length-i-1] + endOfWord

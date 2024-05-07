@@ -28,7 +28,7 @@ def insertTrieDict(t,word,document_id):
         t.root = TrieNode()
         t.root.children = {}
     current = t.root
-    
+    found = False
     for char in word:
         found = False
         
@@ -47,7 +47,7 @@ def insertTrieDict(t,word,document_id):
             current = newNode
             newNode.document_id = document_id
     current.isEndOfWord = True
-    
+
     if current.isEndOfWord and found:
         if current.document_id in current.appearances:
             current.appearances[current.document_id] += 1
