@@ -99,9 +99,9 @@ def searchTrieDictRecursive(current,word,copyWord,foundChars):
    
     if len(word) < 1: 
         if copyWord != foundChars: 
-            return 
+            return None #if the word is not Found return None 
         return current.appearances #Return the dict containing the data of the word 
-    
+       
 
     if current.children is not None: 
         for child in current.children: 

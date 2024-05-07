@@ -3,20 +3,26 @@ import math
 
 def calculateTF(word,documentID,wordsInText,T):  
 
-    #Search the word in the Trie to get the number of appearences in the document 
+    #Search the word in the Trie to get the number of appearences in all documents
     wordAppearances = searchTrieDictRecursive(T.root,word,word,"") 
-
-    #Get the number of appearences in a certain document 
-    t = wordAppearances[documentID] 
-
-    return 1 + math.log10(t/wordsInText) #TF 
-
+    if wordAppearances and documentID in wordAppearances: 
+        #Get the number of appearences in a certain document 
+        t = wordAppearances[documentID] 
+        return 1 + math.log10(t/wordsInText) #TF 
+    else: 
+        t = 0   
+        return 1 + math.log10(t+1/wordsInText+1) #add-one smoothing 
+   
 
 def calculateIDF(word,T,documents): 
     #Get the numbers of documents in which the word appears  (n)
-    n = len(searchTrieDictRecursive(T.root,word,word,""))
-
-    return math.log10(1+ n/documents) #IDF 
+    n = searchTrieDictRecursive(T.root,word,word,"")
+    
+    if n is not None: 
+        n = len(n)
+        return math.log10(1+ n/documents) #IDF 
+    else: 
+        return math.log10(1+ 0/documents)
 
 
 def calculateTEF_IDF(word,documentID,wordsInText,T,documents):
@@ -26,9 +32,7 @@ def calculateTEF_IDF(word,documentID,wordsInText,T,documents):
     return tf * idf 
 
 
-def countWordsInText(text):
-    words = text.split() 
-    return len(words)
+
 
 '''
 T= Trie()

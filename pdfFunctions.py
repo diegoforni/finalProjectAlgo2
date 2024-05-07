@@ -16,6 +16,21 @@ def getIDFromPdf(pdf, pdfToID):
     return pdfToID[pdf]
 
 
+#Counts words in a text 
+def countWordsInText(text):
+    words = text.split() 
+    return len(words)
+
+#recieves an array with all the texts and returns a list of id for each 
+def createIdList(texts): 
+    documentIdList = [] 
+    i = 0 
+    for text in texts: 
+        documentIdList.append(i) 
+        i+= 1 
+    return documentIdList 
+
+
 '''
 pdfList = ['apple','app','ape','banana','bat','ball','cat','car','dog']
 
