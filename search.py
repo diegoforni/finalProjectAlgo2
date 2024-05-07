@@ -33,7 +33,7 @@ def rankDocuments(query,T,amountDocuments,documentsIdList,texts,pdfToID):
    
     for id in rankedScores: 
         pdfRanking.append(pdfToID[id])
-    return pdfRanking
+    return pdfRanking[:3]
 
 
 #testing 
