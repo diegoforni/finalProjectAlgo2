@@ -1,13 +1,16 @@
-class Trie:
-    root = None
-
 class TrieNode:
-    parent = None
-    children = None
-    key = None
-    document_id = None
-    isEndOfWord = False
-    appearances = {} 
+    def __init__(self):
+        self.parent = None
+        self.children = {}
+        self.key = None
+        self.document_id = None
+        self.isEndOfWord = False
+        self.appearances = {}
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+
 
 def printTrie(node, level):
     if node is None:
@@ -109,6 +112,7 @@ def searchTrieDictRecursive(current,word,copyWord,foundChars):
                 foundChars += child 
                 return searchTrieDictRecursive(current.children[child],word[1:],copyWord,foundChars)
         return
+   
     
 '''
 T = Trie()
@@ -121,5 +125,8 @@ insertMainTrie(T,array2,2)
 wordsInTrie = searchTrieDict(T,array) #Use the searchDict function to search for an array of words 
 print(wordsInTrie) 
 print("----------") 
-print(searchTrieDictRecursive(T.root,"apple","apple","")) #Use the recursive function to look for individual words
+print(searchTrieDictRecursive(T.root,"apple","apple","")) #Use the recursive function to search for individual words
+
 '''
+
+
