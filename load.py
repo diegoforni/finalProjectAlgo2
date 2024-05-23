@@ -1,3 +1,6 @@
+#EL PATH ES UN INPUT Y VA CON DOBLE BARRA INVERTIDA
+
+import PyPDF2
 import trie
 import pdfFunctions
 import pickle
@@ -5,36 +8,44 @@ import os
 import cleanText
 
 #crea una lista con los nombres de los pdfs, cada uno le va a tener que cambiar el path
-def namesPDFs():
+def namesPDFs(pathPDFs):
     listNamesPDFs = []
-    listNamesPDFs = os.listdir("C:\\Users\\pc\\Documents\\GitHub\\ProjectFinalAlgo2\\pdfs")
+    listNamesPDFs = os.listdir(pathPDFs) #hay que cambiar el path por un imput
     return listNamesPDFs
 
-#"aca va el path de cada uno en su compu" + listPDFs[0]
-def convertPDFs(listPDFs):
+#convierte los pdfs a texto y los guarda en una lista
+def convertPDFs(listPDFs, base_path):#hay que pasarle el path de la carpeta donde estan los pdfs
+    # Inicializamos una lista vacía para almacenar los textos extraídos de los PDFs
     listTexts = []
+    
+    # Iteramos sobre cada PDF en la lista de PDFs
     for i in range(len(listPDFs)):
-        text = ''
-        with open("C:\\Users\\pc\\Documents\\GitHub\\ProjectFinalAlgo2\\pdfs\\" + listPDFs[i], 'rb') as file:
-            # Lee el contenido del archivo PDF como una cadena binaria
-            pdf_content = file.read()
-            try:
-                # Intenta decodificar el contenido del PDF como UTF-8
-                text = pdf_content.decode('utf-8')
-            except UnicodeDecodeError:
-                # Si no se puede decodificar como UTF-8, intenta Latin-1
-                try:
-                    text = pdf_content.decode('latin-1')
-                except UnicodeDecodeError:
-                    # Si aún hay un error, simplemente regresa el texto vacío
-                    pass
-        listTexts.append(text)
+        # Construimos el path completo al archivo PDF
+        pdf_path = base_path +"\\"+ listPDFs[i]
+        
+        # Abrimos el archivo PDF en modo lectura binaria
+        with open(pdf_path, 'rb') as file:
+            # Creamos un objeto PdfReader para leer el archivo PDF
+            reader = PyPDF2.PdfReader(file)
+            
+            # Inicializamos una cadena vacía para almacenar el texto extraído
+            text = ''
+            
+            # Iteramos sobre cada página en el archivo PDF
+            for page in reader.pages:
+                # Extraemos el texto de la página y lo agregamos a la cadena de texto
+                text += page.extract_text()
+            
+            # Agregamos el texto extraído a la lista de textos
+            listTexts.append(text)
+    
+    # Devolvemos la lista de textos extraídos
     return listTexts
 
-def loadInTrie(): #esta es la funcion que hay que llamar para cargar los archivos al trie
+def loadInTrie(pathPDFs): #esta es la funcion que hay que llamar para cargar los archivos al trie
     
-    listPDFs = namesPDFs()  #lista de nombres de los pdfs
-    listTexts = convertPDFs(listPDFs) #lista de textos de los pdfs como strings
+    listPDFs = namesPDFs(pathPDFs)  #lista de nombres de los pdfs
+    listTexts = convertPDFs(listPDFs,pathPDFs) #lista de textos de los pdfs como strings
     #limpio todos los textos
     for i in range(len(listPDFs)):
         listTexts[i] = cleanText.cleanText(listTexts[i])
@@ -60,8 +71,19 @@ def loadTrie(): #esta funcion carga el trie desde un archivo
         trie = pickle.load(f)
     return trie   
       
-# T = Trie()
-#T = loadInTrie()
+""""
+#EL PATH ES UN INPUT
+path = "C:\\Users\\pc\\Documents\\GitHub\\ProjectFinalAlgo2\\pdfs"
 
-#saveTrie(T)
-trie.printTrie(loadInTrie().root,1)
+#GUARDO LOS PDFS EN EL TRIE
+T = loadInTrie(path)
+
+#GUARDO EL TRIE EN UN ARCHIVO
+saveTrie(T)
+
+#ME TRAIGO EL TRIE DESDE EL ARCHIVO Y LO GUARDO EN UNA VARIABLE
+R = loadTrie()
+
+trie.printTrie(R.root,1)
+
+"""
