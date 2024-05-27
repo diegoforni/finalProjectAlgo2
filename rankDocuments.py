@@ -5,7 +5,7 @@ import cleanText
 import search
 import pdfFunctions
 
-path = 'C:\\Users\\juana\\OneDrive\\Documents\\GitHub\\ProjectFinalAlgo2\\pdfs'
+path = '/Users/diegoforni/Documents/ProjectoFinalAlgo2/pdfs'
 
 pdfNames = load.namesPDFs(path)
 
@@ -72,7 +72,7 @@ words = closestWords(matrix,arrayInput)
 #print(words)
 
 documentsId = [0,1,2,3]
-pdfToId = pdfFunctions.createPdfID(['comidas','historia','biologia','poker'])
+pdfToId, idToPdf = pdfFunctions.createPdfID(['comidas','historia','biologia','poker'])
 
 texts1[0] = cleanText.cleanText(texts1[0])
 texts1[1] = cleanText.cleanText(texts1[1])
