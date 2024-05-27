@@ -60,7 +60,7 @@ def calculateDistance(v1, v2):
 def getClosestWords(matrix, v1):
     # Inicializar lista con distancias grandes y palabras vacías
     closestWords = [(float('inf'), ''), (float('inf'), ''), (float('inf'), '')]
-
+    v1 = matrix[v1]
     for key, vector in matrix.items():
         distance = calculateDistance(v1, vector)
         if distance != 0:
@@ -75,12 +75,6 @@ def getClosestWords(matrix, v1):
     return [word for dist, word in closestWords]
 
 
-def closestWords(matrix, words):
-    closest = []
-    for i in range(len(words)):
-        closest[i].append(getClosestWords(matrix,words[i]))
-    return closest
-
 #start_time = time.time()
 texts = splitTexts(texts)
 for text in range(len(texts)):
@@ -88,10 +82,9 @@ for text in range(len(texts)):
     
 #print(texts[0])
 matrix = fillMatrix(texts)
-
-if existInMatrix(matrix, "historia"):
-    varToCall = cleanText.cleanText("historia")[0]
-    print(getClosestWords(matrix, matrix[varToCall]))
+if existInMatrix(matrix, "póker"):
+    varToCall = cleanText.cleanText("póker")[0]
+    #print(getClosestWords(matrix, varToCall))
     
 #printMatrix(matrix)
 #print('cantidad de palabras: ', len(matrix))

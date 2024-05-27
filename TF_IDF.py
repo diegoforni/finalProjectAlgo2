@@ -9,9 +9,10 @@ def calculateTF(word,documentID,wordsInText,T):
         #Get the number of appearences in a certain document 
         t = wordAppearances[documentID] 
         return 1 + math.log10(t/wordsInText) #TF 
-    else: 
-        t = 0   
-        return 1 + math.log10(t+1/wordsInText+1) #add-one smoothing 
+    else:
+        if wordsInText == 0:
+            wordsInText = 1
+        return 1 + math.log10(1/wordsInText+1)
    
 
 def calculateIDF(word,T,documents): 

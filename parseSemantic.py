@@ -61,6 +61,7 @@ wordEndings = {
     "ino": len("ino"),
     "ísimo": len("ísimo"),
     "ear": len("ear"),
+    "ores": len("ores"),
 }
 
 def parseSemantic(word):
