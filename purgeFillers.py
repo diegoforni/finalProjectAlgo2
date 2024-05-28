@@ -43,12 +43,15 @@ emptyWords = {
     ".", ";", ",", ":", "(", ")", "[", "]", "{", "}", "?", "¿", "!", "¡", "-", "'", '"', "/", "\\", "*", "&", "@", "#", "$", "%", "^", "=", "+", "~", "<", ">", "|","*","_","`","¨","´","°","¬"
 }
 
-
+def removeAccents(word):
+    accents  = {'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u', 'ü': 'u'}
+    return ''.join(accents.get(c, c) for c in word) 
 #ORDEN DE COMPLEJIDAD O(1) ya que la busqueda de un elemento en un conjunto es O(1) 
 #porque python usa tablas de hash
 #revisa que la palabra este en el listado de palabras vacias 
 def purgeFillers(word):
     word = cleanSimbols(word)
+    #word = removeAccents(word)
     if word in emptyWords:
         return None
     else:
@@ -61,4 +64,3 @@ def cleanSimbols(word):
         word = word.replace(i,'')
     return word
             
-

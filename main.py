@@ -10,10 +10,12 @@ A = load.loadInTrie(path) #cargamos los pdfs en el trie
 
 load.saveTrie(A) #guardamos el trie en un archivo
 
+print(" ")
 print("El trie se ha guardado en un archivo llamado trieDocument")
 
 T = load.loadTrie() #cargamos el trie desde el archivo
 
+print(" ")
 consulta = input("Ingrese la consulta: ")
 
 consulta = cleanText.cleanText(consulta) #limpiamos la consulta
@@ -21,4 +23,5 @@ consulta = cleanText.cleanText(consulta) #limpiamos la consulta
 
 pdfNames = load.namesPDFs(path)
 texts = load.convertPDFs(pdfNames,path) #cargamos los textos de los pdfs
+print(" ")
 print(rankDocuments.rankDocuments(consulta, texts,T,len(texts),pdfNames)) #rankeamos los documentos

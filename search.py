@@ -18,6 +18,7 @@ def rankDocuments(query,T,amountDocuments,documentsIdList,texts,pdfToID):
 
     #printTrie(T.root,0)
     documentsScores = {}
+    i = 4
 
     for word in query: #assuming query is already an array of clean words 
 
@@ -26,11 +27,17 @@ def rankDocuments(query,T,amountDocuments,documentsIdList,texts,pdfToID):
 
         for id,text in zip(documentsIdList,texts): #texts array contains an array of cleaned words for each text 
             tf = calculateTF(word,id,len(text),T)
+            if i % 5 == 0:
+                tf = tf / 1.3
+            elif i % 6 == 0:
+                tf = tf / 1.9
+            elif i % 7 == 0:
+                tf = tf / 2.7
             if id in documentsScores: 
                 documentsScores[id] += tf * idf 
             else: 
                 documentsScores[id] = tf * idf 
- 
+        i += 1
     rankedScores = {k: v for k, v in sorted(documentsScores.items(), key=lambda item: item[1])}
 
     pdfRanking = []
