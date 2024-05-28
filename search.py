@@ -22,7 +22,7 @@ def rankDocuments(query,T,amountDocuments,documentsIdList,texts,pdfToID):
     print("texts: ",texts)
     print("pdfToID: ",pdfToID)
 
-    printTrie(T.root,0)
+    #printTrie(T.root,0)
     documentsScores = {}
 
     for word in query: #assuming query is already an array of clean words 
@@ -45,8 +45,9 @@ def rankDocuments(query,T,amountDocuments,documentsIdList,texts,pdfToID):
         pdfRanking.append(pdfToID[id])
         
     return pdfRanking
+
 #testing 
-    """
+'''
 pdfNameList = ["rosario", "poker", "mascotas"]
 
 pdfToID, idToPdf = createPdfID(pdfNameList) 
@@ -78,6 +79,4 @@ for text,id in zip(cleanedTexts,documentsIdList):
 rank = rankDocuments(cleanedQuery,T,len(texts),documentsIdList,cleanedTexts,pdfToID)
 print(rank)
 
-
-
-    """
+'''

@@ -2,7 +2,7 @@ import cleanText
 import load
 
 ##Cargar su path con los pdfs antes de usar
-path = 'C:\\Users\\juana\\OneDrive\\Documents\\GitHub\\ProjectFinalAlgo2\\pdfs'
+path = '/Users/Rocio/Documents/GitHub/finalProjectAlgo2/pdfs'
 
 pdfNames = load.namesPDFs(path)
 

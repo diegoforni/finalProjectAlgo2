@@ -5,7 +5,7 @@ import cleanText
 import search
 import pdfFunctions
 
-path = '/Users/diegoforni/Documents/ProjectoFinalAlgo2/pdfs'
+path = '/Users/Rocio/Documents/GitHub/finalProjectAlgo2/pdfs'
 
 pdfNames = load.namesPDFs(path)
 
@@ -45,11 +45,7 @@ for text in range(len(texts)):
 matrix = vwd.fillMatrix(texts)
         
 
-
-
-
-
-strInput = "gatos"
+strInput = "argentina"
 strInput = cleanText.cleanText(strInput)
 
 arrayInput = []
@@ -64,7 +60,7 @@ for word in strInput:
 
 #print("words: ",words)
 
-words = cleanText.cleanText("gatos")
+words = cleanText.cleanText("argentina rosario ciudad")
 
 documentsId = [0,1,2]
 pdfToId, idToPdf = pdfFunctions.createPdfID(pdfNames)
@@ -75,19 +71,20 @@ texts1[2] = "las mascotas mas comunes son perros y gatos"
 
 T = t.Trie()
 array1 = cleanText.cleanText(texts1[0]) 
+print(array1)
 t.insertMainTrie(T,array1,0)
 
 array2 = texts1[1]
-array1 = cleanText.cleanText(texts1[1]) 
-
+array2 = cleanText.cleanText(texts1[1]) 
+print(array2)
 t.insertMainTrie(T,array2,1)
 
 array3 = texts1[2]
-array1 = cleanText.cleanText(texts1[2]) 
-
+array3 = cleanText.cleanText(texts1[2]) 
+print(array3)
 t.insertMainTrie(T,array3,2)
-t.printTrie(T.root,0)
 
+t.printTrie(T.root,0)
 
 print(search.rankDocuments(words,T,3,documentsId,texts1,pdfToId))
 

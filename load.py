@@ -71,9 +71,8 @@ def loadTrie(): #esta funcion carga el trie desde un archivo
         trie = pickle.load(f)
     return trie   
       
-""""
 #EL PATH ES UN INPUT
-path = "C:\\Users\\pc\\Documents\\GitHub\\ProjectFinalAlgo2\\pdfs"
+path = '/Users/Rocio/Documents/GitHub/finalProjectAlgo2/pdfs'
 
 #GUARDO LOS PDFS EN EL TRIE
 T = loadInTrie(path)
@@ -84,6 +83,4 @@ saveTrie(T)
 #ME TRAIGO EL TRIE DESDE EL ARCHIVO Y LO GUARDO EN UNA VARIABLE
 R = loadTrie()
 
-trie.printTrie(R.root,1)
-
-"""
+#trie.printTrie(R.root,1)
