@@ -13,6 +13,7 @@ def cleanText(text): #recibe una cadena de texto y devuelve una lista de palabra
         words.remove(None)
     
     for i in range(len(words)): #saco las terminaciones a las palabras
-        words[i] = parseSemantic(words[i])
+        for j in range(3):
+            words[i] = parseSemantic(words[i])
 
     return words

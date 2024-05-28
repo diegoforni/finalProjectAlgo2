@@ -5,7 +5,7 @@ import cleanText
 import search
 import pdfFunctions
 
-path = '/Users/Rocio/Documents/GitHub/finalProjectAlgo2/pdfs'
+path = 'C:\\Users\\juana\\OneDrive\\Documents\\GitHub\\ProjectFinalAlgo2\\pdfs'
 
 pdfNames = load.namesPDFs(path)
 
@@ -45,7 +45,7 @@ for text in range(len(texts)):
 matrix = vwd.fillMatrix(texts)
         
 
-strInput = "argentina"
+strInput = "bacteria enfermedad contagio"
 strInput = cleanText.cleanText(strInput)
 
 arrayInput = []
@@ -53,40 +53,51 @@ arrayInput = []
 for word in strInput:
     if vwd.existInMatrix(matrix, word):
         arrayInput.append(word)
-        
+
 #print(arrayInput)
 
-#words = closestWords(matrix,arrayInput)
+words = closestWords(matrix,arrayInput)
 
 #print("words: ",words)
 
-words = cleanText.cleanText("argentina rosario ciudad")
+#words = cleanText.cleanText("argentina rosario ciudad")
 
-documentsId = [0,1,2]
+documentsId = [0,1,2,3,4,5]
+
 pdfToId, idToPdf = pdfFunctions.createPdfID(pdfNames)
 
-texts1[0] = "rosario es una ciudad de argentina, comen gatos"
-texts1[1] = "el poker es un juego de cartas muy popular"
-texts1[2] = "las mascotas mas comunes son perros y gatos"
+#print(matrix['enfermedad'])
 
 T = t.Trie()
 array1 = cleanText.cleanText(texts1[0]) 
-print(array1)
+#print(array1)
 t.insertMainTrie(T,array1,0)
 
-array2 = texts1[1]
+
 array2 = cleanText.cleanText(texts1[1]) 
-print(array2)
+#print(array2)
 t.insertMainTrie(T,array2,1)
 
-array3 = texts1[2]
+
 array3 = cleanText.cleanText(texts1[2]) 
-print(array3)
+#print(array3)
 t.insertMainTrie(T,array3,2)
 
-t.printTrie(T.root,0)
+array4 = cleanText.cleanText(texts1[3]) 
+#print(array3)
+t.insertMainTrie(T,array4,3)
 
-print(search.rankDocuments(words,T,3,documentsId,texts1,pdfToId))
+array5 = cleanText.cleanText(texts1[4]) 
+#print(array3)
+t.insertMainTrie(T,array5,4)
+
+array6 = cleanText.cleanText(texts1[5]) 
+#print(array3)
+t.insertMainTrie(T,array6,5)
+
+#t.printTrie(T.root,0)
+
+print(search.rankDocuments(words,T,6,documentsId,texts1,pdfToId))
 
 #palabras = cleanText.cleanText("manos cartas valor")
 #print(t.searchTrieDict(T,palabras))

@@ -72,7 +72,7 @@ def loadTrie(): #esta funcion carga el trie desde un archivo
     return trie   
       
 #EL PATH ES UN INPUT
-path = '/Users/Rocio/Documents/GitHub/finalProjectAlgo2/pdfs'
+path = 'C:\\Users\\juana\\OneDrive\\Documents\\GitHub\\ProjectFinalAlgo2\\pdfs'
 
 #GUARDO LOS PDFS EN EL TRIE
 T = loadInTrie(path)

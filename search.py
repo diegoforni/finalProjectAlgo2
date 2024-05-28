@@ -15,12 +15,6 @@ import time
 
 def rankDocuments(query,T,amountDocuments,documentsIdList,texts,pdfToID): 
 
-    print("Parametros: ")
-    print("query: ",query)
-    print("amountDocuments: ",amountDocuments)
-    print("documentsIdList: ",documentsIdList)
-    print("texts: ",texts)
-    print("pdfToID: ",pdfToID)
 
     #printTrie(T.root,0)
     documentsScores = {}

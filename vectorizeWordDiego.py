@@ -2,7 +2,7 @@ import cleanText
 import load
 
 ##Cargar su path con los pdfs antes de usar
-path = '/Users/Rocio/Documents/GitHub/finalProjectAlgo2/pdfs'
+path = 'C:\\Users\\juana\\OneDrive\\Documents\\GitHub\\ProjectFinalAlgo2\\pdfs'
 
 pdfNames = load.namesPDFs(path)
 
@@ -44,8 +44,7 @@ def printMatrix(matrix):
 
 ##Chequea si word existe en alguna fila de la matriz
 def existInMatrix(matrix, word):
-    varToCall = cleanText.cleanText(word)[0]
-    if varToCall in matrix:
+    if word in matrix:
         return True
     else:
         return False
