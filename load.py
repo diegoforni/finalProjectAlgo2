@@ -10,7 +10,7 @@ import cleanText
 #crea una lista con los nombres de los pdfs, cada uno le va a tener que cambiar el path
 def namesPDFs(pathPDFs):
     listNamesPDFs = []
-    listNamesPDFs = os.listdir(pathPDFs) #hay que cambiar el path por un imput
+    listNamesPDFs = os.listdir(pathPDFs) 
     return listNamesPDFs
 
 #convierte los pdfs a texto y los guarda en una lista
@@ -71,16 +71,3 @@ def loadTrie(): #esta funcion carga el trie desde un archivo
         trie = pickle.load(f)
     return trie   
       
-#EL PATH ES UN INPUT
-path = 'C:\\Users\\juana\\OneDrive\\Documents\\GitHub\\ProjectFinalAlgo2\\pdfs'
-
-#GUARDO LOS PDFS EN EL TRIE
-T = loadInTrie(path)
-
-#GUARDO EL TRIE EN UN ARCHIVO
-saveTrie(T)
-
-#ME TRAIGO EL TRIE DESDE EL ARCHIVO Y LO GUARDO EN UNA VARIABLE
-R = loadTrie()
-
-#trie.printTrie(R.root,1)

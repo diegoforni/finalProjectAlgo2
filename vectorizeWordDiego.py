@@ -2,11 +2,6 @@ import cleanText
 import load
 
 ##Cargar su path con los pdfs antes de usar
-path = 'C:\\Users\\juana\\OneDrive\\Documents\\GitHub\\ProjectFinalAlgo2\\pdfs'
-
-pdfNames = load.namesPDFs(path)
-
-texts = load.convertPDFs(pdfNames, path)
 
 def splitTexts(texts):
     paragraphs = []
@@ -72,25 +67,3 @@ def getClosestWords(matrix, v1):
     
     # Extraer solo las palabras
     return [word for dist, word in closestWords]
-
-
-#start_time = time.time()
-texts = splitTexts(texts)
-for text in range(len(texts)):
-    texts[text] = cleanText.cleanText(texts[text])
-    
-#print(texts[0])
-matrix = fillMatrix(texts)
-if existInMatrix(matrix, "póker"):
-    varToCall = cleanText.cleanText("póker")[0]
-    #print(getClosestWords(matrix, varToCall))
-    
-#printMatrix(matrix)
-#print('cantidad de palabras: ', len(matrix))
-#print('cantidad de parrafos: ', len(matrix['hispana']))
-#print(texts)
-#print(matrix[closest[1]])
-#print(v1)
-#end_time = time.time()
-#execution_time = end_time - start_time
-#print("Time to execute getClosestWords: ", execution_time, " seconds")
