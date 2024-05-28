@@ -10,7 +10,10 @@ path = '/Users/diegoforni/Documents/ProjectoFinalAlgo2/pdfs'
 pdfNames = load.namesPDFs(path)
 
 texts = load.convertPDFs(pdfNames, path)
+
 texts1 = texts
+
+
 
 def closestWords(matrix, words):
     closest = []
@@ -41,23 +44,12 @@ for text in range(len(texts)):
     texts[text] = cleanText.cleanText(texts[text])
 matrix = vwd.fillMatrix(texts)
         
-T = t.Trie()
-array1 = texts[0]
-t.insertMainTrie(T,array1,0)
-
-array2 = texts[1]
-t.insertMainTrie(T,array2,1)
-
-array3 = texts[2]
-t.insertMainTrie(T,array3,2)
-
-array4 = texts[3]
-t.insertMainTrie(T,array4,3)
 
 
-#t.printTrie(T.root,0)
 
-strInput = "Jugadores de póker y sus estrategias"
+
+
+strInput = "gatos"
 strInput = cleanText.cleanText(strInput)
 
 arrayInput = []
@@ -68,20 +60,36 @@ for word in strInput:
         
 #print(arrayInput)
 
-words = closestWords(matrix,arrayInput)
-#print(words)
+#words = closestWords(matrix,arrayInput)
 
-documentsId = [0,1,2,3]
-pdfToId, idToPdf = pdfFunctions.createPdfID(['comidas','historia','biologia','poker'])
+#print("words: ",words)
 
-texts1[0] = cleanText.cleanText(texts1[0])
-texts1[1] = cleanText.cleanText(texts1[1])
-texts1[2] = cleanText.cleanText(texts1[2])
-texts1[3] = cleanText.cleanText(texts1[3])
+words = cleanText.cleanText("gatos")
 
-print(texts1)
+documentsId = [0,1,2]
+pdfToId, idToPdf = pdfFunctions.createPdfID(pdfNames)
 
-print(search.rankDocuments(words,T,4,documentsId,texts1,pdfToId))
+texts1[0] = "rosario es una ciudad de argentina, comen gatos"
+texts1[1] = "el poker es un juego de cartas muy popular"
+texts1[2] = "las mascotas mas comunes son perros y gatos"
+
+T = t.Trie()
+array1 = cleanText.cleanText(texts1[0]) 
+t.insertMainTrie(T,array1,0)
+
+array2 = texts1[1]
+array1 = cleanText.cleanText(texts1[1]) 
+
+t.insertMainTrie(T,array2,1)
+
+array3 = texts1[2]
+array1 = cleanText.cleanText(texts1[2]) 
+
+t.insertMainTrie(T,array3,2)
+t.printTrie(T.root,0)
+
+
+print(search.rankDocuments(words,T,3,documentsId,texts1,pdfToId))
 
 #palabras = cleanText.cleanText("manos cartas valor")
 #print(t.searchTrieDict(T,palabras))
