@@ -21,7 +21,7 @@ def convertPDFs(listPDFs, base_path):#hay que pasarle el path de la carpeta dond
     # Iteramos sobre cada PDF en la lista de PDFs
     for i in range(len(listPDFs)):
         # Construimos el path completo al archivo PDF
-        pdf_path = base_path +"\\"+ listPDFs[i]
+        pdf_path = base_path +"/"+ listPDFs[i]
         
         # Abrimos el archivo PDF en modo lectura binaria
         with open(pdf_path, 'rb') as file:

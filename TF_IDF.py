@@ -1,18 +1,18 @@
 from trie import searchTrieDict,insertTrieDict,Trie,TrieNode,searchTrieDictRecursive, insertMainTrie
 import math 
 
-def calculateTF(word,documentID,wordsInText,T):  
-
-    #Search the word in the Trie to get the number of appearences in all documents
-    wordAppearances = searchTrieDictRecursive(T.root,word,word,"") 
-    if wordAppearances and documentID in wordAppearances: 
-        #Get the number of appearences in a certain document 
-        t = wordAppearances[documentID] 
-        return 1 + math.log10(t/wordsInText) #TF 
+def calculateTF(word, documentID, wordsInText, T):
+    # Search the word in the Trie to get the number of appearances in all documents
+    wordAppearances = searchTrieDictRecursive(T.root, word, word, "")
+    if wordAppearances and documentID in wordAppearances:
+        # Get the number of appearances in a certain document
+        t = wordAppearances[documentID]
+        print("t: ",t)
+        return t / wordsInText
     else:
         if wordsInText == 0:
             wordsInText = 1
-        return 1 + math.log10(1/wordsInText+1)
+        return 0
    
 
 def calculateIDF(word,T,documents): 

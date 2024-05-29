@@ -51,7 +51,7 @@ def removeAccents(word):
 #revisa que la palabra este en el listado de palabras vacias 
 def purgeFillers(word):
     word = cleanSimbols(word)
-    #word = removeAccents(word)
+    word = removeAccents(word)
     if word in emptyWords:
         return None
     else:
