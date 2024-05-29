@@ -40,6 +40,13 @@ def rankDocuments(query,T,amountDocuments,documentsIdList,texts,pdfToID):
         i += 1
     rankedScores = {k: v for k, v in sorted(documentsScores.items(), key=lambda item: item[1], reverse=True)}
 
+    for id in documentsIdList:
+        if documentsScores[id] == 0:
+            del rankedScores[id]
+            
+    if len(rankedScores) == 0:
+        return "Document not found"
+    
     pdfRanking = []
    
     for id in rankedScores: 
