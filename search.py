@@ -38,7 +38,7 @@ def rankDocuments(query,T,amountDocuments,documentsIdList,texts,pdfToID):
             else: 
                 documentsScores[id] = tf * idf 
         i += 1
-    rankedScores = {k: v for k, v in sorted(documentsScores.items(), key=lambda item: item[1])}
+    rankedScores = {k: v for k, v in sorted(documentsScores.items(), key=lambda item: item[1], reverse=True)}
 
     pdfRanking = []
    

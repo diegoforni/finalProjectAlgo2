@@ -7,7 +7,6 @@ def calculateTF(word, documentID, wordsInText, T):
     if wordAppearances and documentID in wordAppearances:
         # Get the number of appearances in a certain document
         t = wordAppearances[documentID]
-        print("t: ",t)
         return t / wordsInText
     else:
         if wordsInText == 0:
