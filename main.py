@@ -1,6 +1,6 @@
 import load
 import rankDocuments
-import search
+import searchRank
 import cleanText
 
 path = input("ingrese la ruta de la carpeta que contiene los PDFs: ")

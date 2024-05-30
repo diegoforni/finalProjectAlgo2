@@ -2,7 +2,7 @@ import vectorizeWordDiego as vwd
 import trie as t
 import load
 import cleanText
-import search
+import searchRank
 import pdfFunctions
 
 def closestWords(matrix, words):
@@ -42,6 +42,6 @@ def rankDocuments(consulta, texts,T,amountDocuments, pdfNames):
         print(closest)
         documentsIdList = list(range(amountDocuments))
         pdfToId, idToPdf = pdfFunctions.createPdfID(pdfNames)
-        return search.rankDocuments(closest,T,amountDocuments,documentsIdList,texts,pdfToId)
+        return searchRank.rankDocuments(closest,T,amountDocuments,documentsIdList,texts,pdfToId)
     
     
