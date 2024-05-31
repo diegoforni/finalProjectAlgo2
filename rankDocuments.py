@@ -37,6 +37,8 @@ def rankDocumentsTest(trie,words,cantTextos,pdfNames):
         if dictWords[word] is not None:
             for doc in dictWords[word]:
                 documents[pdfNames[doc]] += 1    
+    
+    documents = {k: v for k, v in documents.items() if v != 0}
                 
     documents = sorted(documents.items(), key=lambda x: x[1], reverse=True)
     documents = [x[0] for x in documents]
