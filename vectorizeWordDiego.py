@@ -1,3 +1,6 @@
+import time
+import trie as tr
+
 def splitTexts(texts):
     paragraphs = []
 
@@ -13,7 +16,7 @@ def calculate_tf(text, word):
     word_count = words.count(word)
     return word_count / len(words) if len(words) > 0 else 0
 
-def fillMatrix(texts):
+def fillMatrix(texts,t,cantTextos):
     matrix = {}
     allWords = set()
     
@@ -25,7 +28,13 @@ def fillMatrix(texts):
         for text in texts:
             wordTF = calculate_tf(text, word)
             matrix[word].append(wordTF)
-    
+        wordOccurrence = tr.searchTrieDictRecursive(t.root, word, word, foundChars="")
+        for i in range(cantTextos):
+            if i in wordOccurrence:
+                matrix[word].append(1)
+            else:
+                matrix[word].append(0)
+
     return matrix
 
 def printMatrix(matrix):
@@ -43,22 +52,30 @@ def calculateDistance(v1, v2):
     distance = 0
     for i in range(len(v1)):
         distance += (v1[i] - v2[i])**2
-    return distance**0.5
+    return distance**0.5,True
 
 
-def getClosestWords(matrix, v1):
+def getClosestWords(matrix, v1,cantParrafos,cantTextos):
     # Inicializar lista con distancias grandes y palabras vacías
     closestWords = [(float('inf'), ''), (float('inf'), ''), (float('inf'), '')]
-    v1 = matrix[v1]
+    v1Vec = matrix[v1]
+    found = False
+    time1 = time.time()
     for key, vector in matrix.items():
-        distance = calculateDistance(v1, vector)
-        if distance != 0:
-            if distance < closestWords[0][0]:
-                closestWords = [(distance, key)] + closestWords[:2]
-            elif distance < closestWords[1][0]:
-                closestWords = [closestWords[0]] + [(distance, key)] + [closestWords[1]]
-            elif distance < closestWords[2][0]:
-                closestWords[2] = (distance, key)
+        for i in range(cantParrafos-cantTextos,cantParrafos):
+            if v1Vec[i] == 1 and vector[i] == 1:
+                distance,found = calculateDistance(v1Vec, vector)
+                break
+        if found:
+            if distance != 0:
+                if distance < closestWords[0][0]:
+                    closestWords = [(distance, key)] + closestWords[:2]
+                elif distance < closestWords[1][0]:
+                    closestWords = [closestWords[0]] + [(distance, key)] + [closestWords[1]]
+                elif distance < closestWords[2][0]:
+                    closestWords[2] = (distance, key)
     
+    time1 = time.time() - time1
+    print("Time to calculate distance: ", time1)
     # Extraer solo las palabras
     return [word for dist, word in closestWords]

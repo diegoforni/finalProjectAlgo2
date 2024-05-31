@@ -29,7 +29,7 @@ T = checkIfMatrix.loadOrCreateTrie("trieDocument",pdfNames,texts)
 
 consulta = cleanText.cleanText(consulta) #limpiamos la consulta
 
-matrix = checkIfMatrix.loadOrCreateMatrix("matrix",texts)
+matrix = checkIfMatrix.loadOrCreateMatrix("matrix",texts,T,len(pdfNames))
 print(" ")
 print(rankDocuments.getClosest(consulta,T,len(texts),pdfNames,matrix)) #rankeamos los documentos
 
