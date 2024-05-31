@@ -5,7 +5,6 @@ def calculateTF(word, documentID, wordsInText, T):
     # Search the word in the Trie to get the number of appearances in all documents
     wordAppearances = searchTrieDictRecursive(T.root, word, word, "")
     if wordAppearances and documentID in wordAppearances:
-        print("wordsIT: ", wordsInText)
         # Get the number of appearances in a certain document
         if wordsInText < 5:
             return 0

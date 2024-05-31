@@ -49,6 +49,10 @@ def loadInTrie(pathPDFs): #esta es la funcion que hay que llamar para cargar los
     #limpio todos los textos
     for i in range(len(listPDFs)):
         listTexts[i] = cleanText.cleanText(listTexts[i])
+    #creo un diccionario con la cantidad de  palabras de cada texto (despu[es de limpiarlos])
+    lengthTexts = {}
+    for i in range(len(listTexts)):
+        lengthTexts[i] = len(listTexts[i])
 
     #creo una lista con los IDs de los pdfs
     idToPdf, pdfToID = pdfFunctions.createPdfID(listPDFs)
@@ -60,7 +64,7 @@ def loadInTrie(pathPDFs): #esta es la funcion que hay que llamar para cargar los
     t = trie.Trie()
     for i in range(len(listTexts)):    
         trie.insertMainTrie(t,listTexts[i],ids[i])
-    return t
+    return t,lengthTexts
 
 def saveTrie(trie): #esta funcion guarda el trie en un archivo
     with open("trieDocument", "wb") as f:

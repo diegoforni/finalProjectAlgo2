@@ -13,7 +13,7 @@ import time
 #calculateTEF_IDF(word,documentID,wordsInText,T,documents)
 #calculateTF(word,documentID,wordsInText,T)
 
-def rankDocuments(query,T,amountDocuments,documentsIdList,texts,pdfToID): 
+def rankDocuments(query,T,amountDocuments,documentsIdList,lengthTexts,pdfToID): 
 
 
     #printTrie(T.root,0)
@@ -25,8 +25,8 @@ def rankDocuments(query,T,amountDocuments,documentsIdList,texts,pdfToID):
         idf = calculateIDF(word,T,amountDocuments) #calculate idf score for each term on the query 
 
 
-        for id,text in zip(documentsIdList,texts): #texts array contains an array of cleaned words for each text 
-            tf = calculateTF(word,id,len(text),T)
+        for id in documentsIdList: #texts array contains an array of cleaned words for each text 
+            tf = calculateTF(word,id,lengthTexts[id],T)
             if i % 5 == 0:
                 tf = tf / 1.3
             elif i % 6 == 0:

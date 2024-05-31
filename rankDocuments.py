@@ -32,7 +32,7 @@ def checkWordInMatrix(matrix,strInput):
     return arrayInput
 
 
-def rankDocuments(consulta, texts,T,amountDocuments, pdfNames):
+def rankDocuments(consulta, texts,T,amountDocuments, pdfNames,lengthTexts):
     matrix,texts = splitTextsParagraphs(texts)
     arrayInput = checkWordInMatrix(matrix,consulta)
     if len(arrayInput) == 0:
@@ -42,6 +42,6 @@ def rankDocuments(consulta, texts,T,amountDocuments, pdfNames):
         print(closest)
         documentsIdList = list(range(amountDocuments))
         pdfToId, idToPdf = pdfFunctions.createPdfID(pdfNames)
-        return searchRank.rankDocuments(closest,T,amountDocuments,documentsIdList,texts,pdfToId)
+        return searchRank.rankDocuments(closest,T,amountDocuments,documentsIdList,lengthTexts,pdfToId)
     
     
