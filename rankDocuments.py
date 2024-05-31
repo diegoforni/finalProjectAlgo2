@@ -1,9 +1,6 @@
 import vectorizeWordDiego as vwd
 import trie as t
-import load
 import cleanText
-import searchRank
-import pdfFunctions
 
 def closestWords(matrix, words):
     closest = []
@@ -20,8 +17,7 @@ def splitTextsParagraphs(texts):
     texts = vwd.splitTexts(texts)
     for text in range(len(texts)):
         texts[text] = cleanText.cleanText(texts[text])
-    matrix = vwd.fillMatrix(texts)
-    return matrix,texts
+    return texts
         
 
 def checkWordInMatrix(matrix,strInput):
@@ -32,16 +28,28 @@ def checkWordInMatrix(matrix,strInput):
     return arrayInput
 
 
-def rankDocuments(consulta, texts,T,amountDocuments, pdfNames):
-    matrix,texts = splitTextsParagraphs(texts)
+def rankDocumentsTest(trie,words,cantTextos,pdfNames):
+    documents = {pdfNames[i]: 0 for i in range(cantTextos)}
+    for i in range(cantTextos):
+        documents[i] = 0
+    dictWords = t.searchTrieDict(trie,words)
+    for word in dictWords:
+        if dictWords[word] is not None:
+            for doc in dictWords[word]:
+                documents[pdfNames[doc]] += 1    
+                
+    documents = sorted(documents.items(), key=lambda x: x[1], reverse=True)
+    documents = [x[0] for x in documents]
+    return documents
+
+
+def getClosest(consulta,T,amountDocuments, pdfNames,matrix):
     arrayInput = checkWordInMatrix(matrix,consulta)
     if len(arrayInput) == 0:
         return "Document not found"
     else:
         closest = closestWords(matrix,arrayInput)
         print(closest)
-        documentsIdList = list(range(amountDocuments))
-        pdfToId, idToPdf = pdfFunctions.createPdfID(pdfNames)
-        return searchRank.rankDocuments(closest,T,amountDocuments,documentsIdList,texts,pdfToId)
+        return rankDocumentsTest(T,closest,amountDocuments,pdfNames)
     
     

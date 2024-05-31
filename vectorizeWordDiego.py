@@ -1,8 +1,3 @@
-import cleanText 
-import load
-
-##Cargar su path con los pdfs antes de usar
-
 def splitTexts(texts):
     paragraphs = []
 

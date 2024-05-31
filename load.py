@@ -42,13 +42,11 @@ def convertPDFs(listPDFs, base_path):#hay que pasarle el path de la carpeta dond
     # Devolvemos la lista de textos extraídos
     return listTexts
 
-def loadInTrie(pathPDFs): #esta es la funcion que hay que llamar para cargar los archivos al trie
-    
-    listPDFs = namesPDFs(pathPDFs)  #lista de nombres de los pdfs
-    listTexts = convertPDFs(listPDFs,pathPDFs) #lista de textos de los pdfs como strings
+def loadInTrie(listPDFs,texts): #esta es la funcion que hay que llamar para cargar los archivos al trie
+    listTexts = []
     #limpio todos los textos
     for i in range(len(listPDFs)):
-        listTexts[i] = cleanText.cleanText(listTexts[i])
+        listTexts.append(cleanText.cleanText(texts[i]))
 
     #creo una lista con los IDs de los pdfs
     idToPdf, pdfToID = pdfFunctions.createPdfID(listPDFs)
