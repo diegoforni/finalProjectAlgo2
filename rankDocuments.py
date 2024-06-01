@@ -5,13 +5,21 @@ import time
 
 def closestWords(matrix, words,cantTextos):
     closest = []
+    if len(words) > 4:
+        toGetClosest = False
+    else:
+        toGetClosest = True
+        
+    if len(words) > 15:
+        return words
+    
     for word in words:
         closest.append(word)
-        closeWords = vwd.getClosestWords(matrix,word,len(matrix[word]),cantTextos)
+        closeWords = vwd.getClosestWords(matrix,word,len(matrix[word]),cantTextos,toGetClosest)
         if closeWords is not None:
             for closeWord in closeWords:
                 closest.append(closeWord)
-        
+    closest = [word for word in closest if word.strip() != '']
     return closest
 
 

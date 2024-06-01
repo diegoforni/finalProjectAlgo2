@@ -22,7 +22,7 @@ emptyWords = {
     "muy", "realmente", "extremadamente", "totalmente", "bastante",
     "verdaderamente", "plenamente", "completamente", "absolutamente", "sí", "no", "quizás", "talvez", "acaso",
     # Preposiciones
-    "a", "ante", "bajo", "cabe", "con", "contra", "de", "desde", "durante", "en", "entre", "hacia", "hasta", "mediante",
+    "a", "ante", "bajo", "cabe", "con", "contra", "de","del", "desde", "durante", "en", "entre", "hacia", "hasta", "mediante",
     "para", "por", "según", "sin", "so", "sobre", "tras", "versus", "vía",
     # Conjunciones
     "y", "e", "ni", "o", "u", "pero", "sino", "sinoque", "mientras", "aunque", "aun", "aún", "sin embargo", "no obstante",

@@ -55,27 +55,41 @@ def calculateDistance(v1, v2):
     return distance**0.5,True
 
 
-def getClosestWords(matrix, v1,cantParrafos,cantTextos):
-    # Inicializar lista con distancias grandes y palabras vacías
+def getClosestWords(matrix, v1_key, cantParrafos, cantTextos,toGetClosest):
+    # Initialize list with large distances and empty words
     closestWords = [(float('inf'), ''), (float('inf'), ''), (float('inf'), '')]
-    v1Vec = matrix[v1]
-    found = False
+    v1Vec = matrix.get(v1_key)
+    
+    if toGetClosest:
+        closestWords.pop()
+        closestWords.pop()
+    
     time1 = time.time()
+    
     for key, vector in matrix.items():
-        for i in range(cantParrafos-cantTextos,cantParrafos):
-            if v1Vec[i] == 1 and vector[i] == 1:
-                distance,found = calculateDistance(v1Vec, vector)
-                break
-        if found:
-            if distance != 0:
+        if key == v1_key:
+            continue  # Skip comparison with the same vector
+        
+        aparece = all(vector[i] == 1 for i in range(cantParrafos - cantTextos, cantParrafos))
+        
+        if not aparece:
+            found = False
+            for i in range(cantParrafos - cantTextos, cantParrafos):
+                if v1Vec[i] == 1 and vector[i] == 1:
+                    distance, found = calculateDistance(v1Vec, vector)
+                    break
+            
+            if found and distance != 0:
                 if distance < closestWords[0][0]:
                     closestWords = [(distance, key)] + closestWords[:2]
                 elif distance < closestWords[1][0]:
-                    closestWords = [closestWords[0]] + [(distance, key)] + [closestWords[1]]
+                    if toGetClosest:
+                        closestWords = [closestWords[0]] + [(distance, key)] + [closestWords[1]]
                 elif distance < closestWords[2][0]:
-                    closestWords[2] = (distance, key)
+                    if toGetClosest:
+                        closestWords[2] = (distance, key)
     
     time1 = time.time() - time1
-    print("Time to calculate distance: ", time1)
-    # Extraer solo las palabras
+    print("Time to calculate distances: ", time1)
+    # Extract only the words
     return [word for dist, word in closestWords]
