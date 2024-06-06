@@ -6,6 +6,7 @@ import pdfFunctions
 import pickle
 import os    
 import cleanText
+import vectorizeWordDiego as vwd
 
 #crea una lista con los nombres de los pdfs, cada uno le va a tener que cambiar el path
 def namesPDFs(pathPDFs):
@@ -75,3 +76,12 @@ def loadTrie(): #esta funcion carga el trie desde un archivo
         trie = pickle.load(f)
     return trie   
       
+
+
+# mover a load
+def splitTextsParagraphs(texts):
+    texts = vwd.splitTexts(texts)
+    for text in range(len(texts)):
+        texts[text] = cleanText.cleanText(texts[text])
+    matrix = vwd.fillMatrix(texts)
+    return matrix,texts
