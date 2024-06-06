@@ -84,4 +84,4 @@ def splitTextsParagraphs(texts):
     for text in range(len(texts)):
         texts[text] = cleanText.cleanText(texts[text])
     matrix = vwd.fillMatrix(texts)
-    return matrix,texts
+    return matrix

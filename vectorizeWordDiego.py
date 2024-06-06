@@ -1,5 +1,4 @@
-import cleanText 
-import load
+import trie as tr
 
 ##Cargar su path con los pdfs antes de usar
 
@@ -18,7 +17,7 @@ def calculate_tf(text, word):
     word_count = words.count(word)
     return word_count / len(words) if len(words) > 0 else 0
 
-def fillMatrix(texts):
+def fillMatrix(texts,t,cantTextos):
     matrix = {}
     allWords = set()
     
@@ -30,7 +29,13 @@ def fillMatrix(texts):
         for text in texts:
             wordTF = calculate_tf(text, word)
             matrix[word].append(wordTF)
-    
+        wordOccurrence = tr.searchTrieDictRecursive(t.root, word, word, foundChars="")
+        for i in range(cantTextos):
+            if i in wordOccurrence:
+                matrix[word].append(1)
+            else:
+                matrix[word].append(0)
+
     return matrix
 
 def printMatrix(matrix):

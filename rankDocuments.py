@@ -31,8 +31,7 @@ def rankDocuments(consulta, texts,T,amountDocuments, pdfNames,lengthTexts):
 
     with open("matrix", "rb") as f:
         matrix = pickle.load(f)    
-
-
+    
     arrayInput = checkWordInMatrix(matrix,consulta)
     if len(arrayInput) == 0:
         return "Document not found"
