@@ -46,6 +46,9 @@ def busqueda(query):
         matrix = pickle.load(f)
     
     result = rankDocuments.rankDocuments(query, texts, T, len(pdfNames), pdfNames, lengthTexts)
+    if result == 'Document not found':
+        print('Document not found')
+        return
     for i in range(len(result)):
         print(i + 1,")", result[i])
     return
