@@ -68,7 +68,6 @@ def getClosestWords(matrix, v1):
     # Inicializar lista con distancias grandes y palabras vacías
     closestWords = [(float('inf'), ''), (float('inf'), ''), (float('inf'), '')]
     v1Vec = matrix[v1]
-    time1 = time.time()
     
     with open("pdfNames", "rb") as f:
         pdfNames = pickle.load(f)
@@ -91,8 +90,6 @@ def getClosestWords(matrix, v1):
             elif distance < closestWords[2][0]:
                 closestWords[2] = (distance, key)
                 
-    time1 = time.time() - time1
-    print("Time to calculate distances: ", time1)
     
     # Extract only the words
     return [word for dist, word in closestWords if word != '']

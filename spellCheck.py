@@ -19,7 +19,9 @@ def wagnerFischer(s1, s2):
 
     return currentRow[lenS1]
 
-def spellCheck(word, dictionary):
+def spellCheck(word):
+    dictionary = loadDictionary("spanishWords.txt")
+
     closestWord = None
     closestDistance = float('inf')
     
@@ -37,12 +39,3 @@ def spellCheck(word, dictionary):
         return closestWord
     
     return None
-
-# Example Usage
-dictionary = loadDictionary("words.txt")
-misspelledWord = "mansane"
-suggestion = spellCheck(misspelledWord, dictionary)
-if suggestion:
-    print(f"Suggestion for '{misspelledWord}': {suggestion}")
-else:
-    print(f"No suggestion with distance 1 or 2 found for '{misspelledWord}' or the word is correct.")

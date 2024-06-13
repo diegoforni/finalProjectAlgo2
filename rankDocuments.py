@@ -55,7 +55,6 @@ def rankDocuments(consulta, texts,T,amountDocuments, pdfNames,lengthTexts):
         return "Document not found"
     else:
         closest = closestWords(matrix,arrayInput)
-        print(closest)
         documentsIdList = list(range(amountDocuments))
         pdfToId, idToPdf = pdfFunctions.createPdfID(pdfNames)
         return searchRank.rankDocuments(closest,T,amountDocuments,documentsIdList,lengthTexts,pdfToId)

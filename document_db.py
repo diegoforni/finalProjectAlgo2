@@ -4,6 +4,7 @@ import rankDocuments
 import cleanText
 import pickle
 import vectorizeWordDiego as vwd
+import spellCheck
 
 texts = None
 
@@ -11,8 +12,6 @@ def carga(path):
     A, lengthTexts = load.loadInTrie(path)  # cargamos los pdfs en el trie
 
     load.saveTrie(A)  # guardamos el trie en un archivo
-
-    print("El trie se ha guardado en un archivo llamado trieDocument")
 
     with open("lengthTexts", "wb") as f:
         pickle.dump(lengthTexts, f)
@@ -33,7 +32,13 @@ def carga(path):
     return
 
 def busqueda(query):
-    query = cleanText.cleanText(query)  # limpiamos la consulta
+    query_words = query.split()
+    for word in query_words:
+        spellChecked = spellCheck.spellCheck(word)
+        if spellChecked is not None:
+            query_words.append(spellChecked)
+            
+    query = cleanText.cleanText(' '.join(query_words))  # limpiamos la consulta
 
     # Buscar en memoria: T, pdfNames, lengthTexts, texts
     with open("lengthTexts", "rb") as f:
