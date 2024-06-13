@@ -8,12 +8,16 @@ def cleanText(text): #recibe una cadena de texto y devuelve una lista de palabra
     
     for i in range(len(words)): #limpio el texto de palabras vacias
         words[i] = purgeFillers(words[i])
+        if words[i] is not None:
+            for j in range(3):
+                words[i] = parseSemantic(words[i])
         
     while None in words: #elimino los none de la lista
         words.remove(None)
     
-    for i in range(len(words)): #saco las terminaciones a las palabras
-        for j in range(3):
-            words[i] = parseSemantic(words[i])
+       
 
     return words
+
+
+print(cleanText("Hola, como estas? todo piola gato salvaje")) #debería devolver ['hola', 'estas']vaje
