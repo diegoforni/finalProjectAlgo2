@@ -26,15 +26,6 @@ def calculateIDF(word,T,documents):
         return math.log10(1+ 0/documents)
 
 
-def calculateTEF_IDF(word,documentID,wordsInText,T,documents):
-
-    tf = calculateTF(word,documentID,wordsInText,T)
-    idf = calculateIDF(word,T,documents)
-    return tf * idf 
-
-
-
-
 '''
 T= Trie()
 document1 = ["messi","messi","messi","ronaldo","ronaldo","balon"]
