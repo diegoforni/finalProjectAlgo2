@@ -19,5 +19,3 @@ def cleanText(text): #recibe una cadena de texto y devuelve una lista de palabra
 
     return words
 
-
-print(cleanText("Hola, como estas? todo piola gato salvaje")) #debería devolver ['hola', 'estas']vaje
